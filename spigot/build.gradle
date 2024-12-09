@@ -13,12 +13,7 @@ repositories {
 dependencies {
     implementation project(path: ":shared")
     implementation project(path: ":nms")
-    implementation project(path: ":v1.19.2", configuration: "reobf")
-    implementation project(path: ":v1.19.3", configuration: "reobf")
     implementation project(path: ":v1.19.4", configuration: "reobf")
-    implementation project(path: ":v1.20.1", configuration: "reobf")
-    implementation project(path: ":v1.20.2", configuration: "reobf")
-    implementation project(path: ":v1.20.4", configuration: "reobf")
 
     compileOnly "org.spigotmc:spigot-api:1.19.4-R0.1-SNAPSHOT"
     compileOnly "com.viaversion:viaversion:5.0.1"

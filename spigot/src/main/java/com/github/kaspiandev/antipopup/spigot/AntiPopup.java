@@ -4,17 +4,10 @@ import com.github.kaspiandev.antipopup.config.APConfig;
 import com.github.kaspiandev.antipopup.listener.PacketEventsListener;
 import com.github.kaspiandev.antipopup.log.LogFilter;
 import com.github.kaspiandev.antipopup.message.ConsoleMessages;
-import com.github.kaspiandev.antipopup.nms.v1_19_2.PlayerInjector_v1_19_2;
-import com.github.kaspiandev.antipopup.nms.v1_19_3.PlayerInjector_v1_19_3;
 import com.github.kaspiandev.antipopup.nms.v1_19_4.PlayerInjector_v1_19_4;
-import com.github.kaspiandev.antipopup.nms.v1_20_1.PlayerInjector_v1_20_1;
-import com.github.kaspiandev.antipopup.nms.v1_20_2.PlayerInjector_v1_20_2;
-import com.github.kaspiandev.antipopup.nms.v1_20_4.PlayerInjector_v1_20_4;
 import com.github.kaspiandev.antipopup.spigot.api.Api;
 import com.github.kaspiandev.antipopup.spigot.hook.HookManager;
 import com.github.kaspiandev.antipopup.spigot.hook.viaversion.ViaVersionHook;
-import com.github.kaspiandev.antipopup.spigot.hook.viaversion.Via_1_19_to_1_19_1;
-import com.github.kaspiandev.antipopup.spigot.hook.viaversion.Via_1_20_4_to_1_20_5;
 import com.github.kaspiandev.antipopup.spigot.listeners.ChatListener;
 import com.github.kaspiandev.antipopup.spigot.nms.PlayerListener;
 import com.github.kaspiandev.antipopup.spigot.platform.SpigotPlatform;
@@ -93,8 +86,6 @@ public final class AntiPopup extends JavaPlugin {
 
         HookManager hookManager = new HookManager();
         ViaVersionHook viaVersionHook = new ViaVersionHook();
-        viaVersionHook.addModifier(Via_1_19_to_1_19_1.class);
-        viaVersionHook.addModifier(Via_1_20_4_to_1_20_5.class);
         hookManager.addHook(viaVersionHook);
         hookManager.load();
 
@@ -117,12 +108,7 @@ public final class AntiPopup extends JavaPlugin {
         if (config.isBlockChatReports()) {
             if (!config.isExperimentalMode()) {
                 PlayerListener playerListener = switch (serverManager.getVersion()) {
-                    case V_1_20_3, V_1_20_4 -> new PlayerListener(new PlayerInjector_v1_20_4());
-                    case V_1_20_2 -> new PlayerListener(new PlayerInjector_v1_20_2());
-                    case V_1_20, V_1_20_1 -> new PlayerListener(new PlayerInjector_v1_20_1());
                     case V_1_19_4 -> new PlayerListener(new PlayerInjector_v1_19_4());
-                    case V_1_19_3 -> new PlayerListener(new PlayerInjector_v1_19_3());
-                    case V_1_19_1, V_1_19_2 -> new PlayerListener(new PlayerInjector_v1_19_2());
                     default -> throw new IllegalStateException("No valid injector found for the server version!");
                 };
 
